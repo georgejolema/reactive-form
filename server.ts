@@ -1,10 +1,11 @@
 import express from 'express';
-import controller from './controller';
+import {controller, pages} from './controller';
 
 const server = express();
 
 server.use(express.static('dist'));
 controller(server);
+pages(server, __dirname);
 
 server.get('/', (req, res) => {
     res.sendFile('index.html');

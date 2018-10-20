@@ -28,7 +28,7 @@ module.exports = {
  resolve: {
    extensions: ['.ts', '.js', '.json', '.css', '.scss'],
  },
- mode: 'production',
+ mode: 'development',
 
  module: {
    rules: [{

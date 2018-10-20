@@ -6,5 +6,5 @@ export default interface User {
     lastName: string;
     email: string;
     birthDate: Date;
-    address: Address[];
+    address?: Address[];
 }
