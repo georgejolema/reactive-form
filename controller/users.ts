@@ -1,20 +1,12 @@
 import express from 'express';
-import User from '../entities/User';
+import request from 'request';
 
-const usersMock: User[] = [
-    {
-        name: 'georgejolema',
-        firstName: 'Jorge',
-        lastName: 'Maldonado',
-        email: 'georgejolema@gmail.com',
-        birthDate: new Date()
-    }
-];
+
 
 export default function usersController() {
     const route = express.Router();
     route.get('/', (req, res) => {
-        res.json(usersMock);
+        request.get('http://localhost:9000/user').pipe(res);
     });
 
     return route;
