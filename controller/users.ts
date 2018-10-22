@@ -9,5 +9,18 @@ export default function usersController() {
         request.get('http://localhost:9000/user').pipe(res);
     });
 
+    route.post('/', (req, res) => {
+       const user = req.body;
+       const options = {
+        uri: 'http://localhost:9000/user',
+        method: 'POST',
+        json: {
+            user
+        }
+      };
+
+      request(options).pipe(res);
+    });
+
     return route;
 }

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { merge, fromEvent } from 'rxjs/index';
 import { map, debounceTime } from 'rxjs/operators';
 import User from '../../../../entities/User';
+import { UserService } from '../../services/user';
 
 @Component({
     templateUrl: './add-user.component.html',
@@ -17,7 +18,7 @@ export class AddUserComponent implements OnInit {
     @ViewChild('formelement') formElement: ElementRef;
     private submitEvent$: Observable<any>;
 
-    constructor(private router: Router, private fb: FormBuilder) {}
+    constructor(private router: Router, private fb: FormBuilder, private apiUser: UserService) {}
 
     ngOnInit() {
         this.userForm =  this.createFormGroup();
@@ -75,6 +76,10 @@ export class AddUserComponent implements OnInit {
         return new Date(year, month, day, 0, 0, 0, 0);
     }
 
+    canDeactivate() {
+        return this.userForm.pristine;
+    }
+
     goBack() {
         this.router.navigate(['/user']);
     }
@@ -107,7 +112,6 @@ export class AddUserComponent implements OnInit {
 
     onSubmit() {
         if (this.userForm.valid) {
-
             const newUser: User = {
                 firstName: this.userForm.value.firstname,
                 lastName: this.userForm.value.lastname,
@@ -116,7 +120,9 @@ export class AddUserComponent implements OnInit {
                 birthDate: this.formatDate(this.userForm.value.birthdate)
             };
 
-            console.log(newUser);
+            this.apiUser.addUser(newUser).subscribe((result) => {
+                this.goBack();
+            });
         }
     }
 }

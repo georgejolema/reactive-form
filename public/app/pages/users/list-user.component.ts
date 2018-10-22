@@ -5,7 +5,6 @@ import { UserService } from '../../services/user';
 import User from '../../../../entities/User';
 
 @Component({
-    selector: 'aa-a',
     templateUrl: './list-user.component.html'
 })
 export class ListUserComponent implements OnInit {

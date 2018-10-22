@@ -1,9 +1,11 @@
 import express from 'express';
 import {controller, pages} from './controller';
+import bodyParser = require('body-parser');
 
 const server = express();
 
 server.use(express.static('dist'));
+server.use(bodyParser.json());
 controller(server);
 pages(server, __dirname);
 

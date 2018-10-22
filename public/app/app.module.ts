@@ -10,6 +10,7 @@ import { appRoutes } from './app.routes';
 import { ListUserComponent } from './pages/users/list-user.component';
 import { RootPageComponent } from './pages/root-page.component';
 import { AddUserComponent } from './pages/users/add-user.component';
+import { AddUserGuard } from './pages/users/add-user.guard';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -20,7 +21,7 @@ import { AddUserComponent } from './pages/users/add-user.component';
         RootPageComponent,
         AddUserComponent
     ],
-    providers: [UserService],
+    providers: [UserService, AddUserGuard],
     imports: [
         BrowserModule,
         ReactiveFormsModule,
