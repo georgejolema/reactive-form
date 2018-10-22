@@ -77,7 +77,7 @@ export class AddUserComponent implements OnInit {
     }
 
     canDeactivate() {
-        return this.userForm.pristine;
+        return this.userForm.pristine || this.userForm.valid;
     }
 
     goBack() {
