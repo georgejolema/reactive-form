@@ -1,50 +1,88 @@
 <div class="card">
     <div class="card-body">
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <form #formelement [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
             <div class="form-group">
                 <label for="username">Account name</label>
                 <input 
                     type="text" 
                     class="form-control" 
+                    [ngClass]="{'is-invalid': (validityObservables.isUserNameValid$ | async)}"
                     id="username" 
                     name="username" 
                     placeholder="username"
-                    formControlName="username"/>
+                    formControlName="username"
+                    aria-describedby="userhelperblock"/>
+                
+                <small id="userhelperblock" class="invalid-feedback">
+                  {{validateTextInputs('username', 'username')}}
+                </small>
             </div>
-            <div class="form-group">
-                <label for="firstname">First name</label>
-                <input 
-                    type="text" 
-                    class="form-control" 
-                    id="firstname" 
-                    name="firstname" 
-                    placeholder="first name"
-                    formControlName="firstname"/>
+            <div class="form-row">
+                <div class="col-md-6 form-group">
+                    <label for="firstname">First name</label>
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        [ngClass]="{'is-invalid': (validityObservables.isFirstNameValid$ | async)}"
+                        id="firstname" 
+                        name="firstname" 
+                        placeholder="first name"
+                        formControlName="firstname"
+                        aria-describedby="firstnamehelperblock"/>
+    
+                    <small id="firstnamehelperblock" class="invalid-feedback">
+                        {{validateTextInputs('firstname', 'first name')}}
+                    </small>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="lastname">Last name</label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        [ngClass]="{'is-invalid': (validityObservables.isLastNameValid$ | async)}"
+                        id="lastname" 
+                        name="lastname" 
+                        placeholder="last name"
+                        formControlName="lastname"
+                        aria-describedby="lastnamenamehelperblock"/>
+                    
+                    <small id="lastnamenamehelperblock" class="invalid-feedback">
+                        {{validateTextInputs('lastname', 'last name')}}
+                    </small>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="lastname">Last name</label>
-                <input 
-                    type="text" 
-                    class="form-control" 
-                    id="lastname" 
-                    name="lastname" 
-                    placeholder="last name"
-                    formControlName="lastname"/>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input 
-                    type="text" class="form-control" id="email" name="email" placeholder="email"/>
-            </div>
-            <div class="form-group">
-                <label for="birthdate">Birth age</label>
-                <input
-                    type="text" 
-                    class="form-control" 
-                    id="birthdate" 
-                    name="birthdate" 
-                    placeholder="birthdate"
-                    formControlName="birthdate"/>
+            <div class="form-row">
+                <div class="col-md-6 form-group">
+                    <label for="email">Email</label>
+                    <input
+                        class="form-control" 
+                        [ngClass]="{'is-invalid': (validityObservables.isEmailValid$ | async)}"
+                        id="email" 
+                        name="email" 
+                        placeholder="youremail@domain.com"
+                        formControlName="email"
+                        type="email"
+                        aria-describedby="emailhelperblock"/>
+                    
+                    <small id="emailhelperblock" class="invalid-feedback">
+                        {{validateSpecialInput('email', 'email')}}
+                    </small>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="birthdate">Birth age</label>
+                    <input
+                        type="text" 
+                        class="form-control" 
+                        id="birthdate" 
+                        name="birthdate" 
+                        [ngClass]="{'is-invalid': (validityObservables.isBirthDateValid$ | async)}"
+                        placeholder="dd-mm-yyyy"
+                        formControlName="birthdate" />
+
+                    <small id="emailhelperblock" class="invalid-feedback">
+                        {{validateSpecialInput('birthdate', 'birth date')}}
+                    </small>
+                </div>
             </div>
             <div class="form-group">
                 <div class="form-check">
@@ -52,7 +90,8 @@
                     <label class="form-check-label" for="hasaddress">Has address</label>             
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary mr-md-2">Save</button>
+            <button 
+                type="submit" class="btn btn-primary mr-md-2">Save</button>
             <button class="btn btn-secondary" (click)="goBack()">Back</button>
         </form>
     </div>
