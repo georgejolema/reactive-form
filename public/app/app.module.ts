@@ -11,6 +11,7 @@ import { ListUserComponent } from './pages/users/list-user.component';
 import { RootPageComponent } from './pages/root-page.component';
 import { AddUserComponent } from './pages/users/add-user.component';
 import { AddUserGuard } from './pages/users/add-user.guard';
+import { AddressService } from './services/address';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -21,7 +22,7 @@ import { AddUserGuard } from './pages/users/add-user.guard';
         RootPageComponent,
         AddUserComponent
     ],
-    providers: [UserService, AddUserGuard],
+    providers: [UserService, AddressService, AddUserGuard],
     imports: [
         BrowserModule,
         ReactiveFormsModule,

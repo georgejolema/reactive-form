@@ -86,8 +86,62 @@
             </div>
             <div class="form-group">
                 <div class="form-check">
-                    <input id="hasaddress" name="hasaddress" type="checkbox" />
+                    <input formControlName="enableAddress" id="hasaddress" name="hasaddress" type="checkbox" />
                     <label class="form-check-label" for="hasaddress">Has address</label>             
+                </div>
+            </div>
+
+            <div *ngIf="userForm.get('enableAddress').value">
+                <div class="form-row">
+                    <div class="col-md-4 form-group">
+                        <label for="city">Country</label>
+                        <select class="form-control">
+                            <option value="-1">-Select an option-</option>
+                            <option 
+                                *ngFor="let country of countries$ | async" 
+                                value="country">
+                                    {{country}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label>State</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="state" />
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label>City</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="city" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-4 form-group">
+                        <label>Address 1</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="address1" />
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label>Address 2</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="address2" />
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label>Zip</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="zip" />
+                    </div>
                 </div>
             </div>
 

@@ -6,6 +6,7 @@ import { merge, fromEvent } from 'rxjs/index';
 import { map, debounceTime } from 'rxjs/operators';
 import User from '../../../../entities/User';
 import { UserService } from '../../services/user';
+import { AddressService } from '../../services/address';
 
 @Component({
     templateUrl: './add-user.component.html',
@@ -14,11 +15,16 @@ import { UserService } from '../../services/user';
 export class AddUserComponent implements OnInit {
     userForm: FormGroup;
     validityObservables: ValidityObservables = new ValidityObservables();
+    countries$: Observable<string[]> = this.apiAddress.getCountries();
 
     @ViewChild('formelement') formElement: ElementRef;
     private submitEvent$: Observable<any>;
 
-    constructor(private router: Router, private fb: FormBuilder, private apiUser: UserService) {}
+    constructor(
+        private router: Router,
+        private fb: FormBuilder,
+        private apiUser: UserService,
+        private apiAddress: AddressService) {}
 
     ngOnInit() {
         this.userForm =  this.createFormGroup();
@@ -32,7 +38,8 @@ export class AddUserComponent implements OnInit {
             firstname: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
             lastname: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
             email: ['', [Validators.required, Validators.pattern(/[a-zA-Z0-9]+@[a-zA-Z0-9]+\.com$/)]],
-            birthdate: ['', [Validators.required, Validators.pattern(/[0-9]{2}-[0-9]{2}-[0-9]{4}$/)]]
+            birthdate: ['', [Validators.required, Validators.pattern(/[0-9]{2}-[0-9]{2}-[0-9]{4}$/)]],
+            enableAddress: ['']
         });
     }
 
