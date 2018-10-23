@@ -1,5 +1,14 @@
 <div class="list-user-component">
-    <button class="btn btn-primary add-user" (click)="addUser()">Add user</button>
+    <div class="form-inline">
+        <button class="btn btn-primary add-user" (click)="addUser()">Add user</button>
+        <input 
+            type="text" 
+            id="search" 
+            name="search" 
+            class="ml-auto form-control" 
+            placeholder="search"
+            [(ngModel)]="search" />
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
